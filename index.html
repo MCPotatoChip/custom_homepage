@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="a custom new tab page with live nasa backgrounds and tech news" />
+    <title>New Tab</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>" />
+  </head>
+  <body>
+
+    <!-- this covers the screen while the background image loads -->
+    <div id="loading-overlay" aria-hidden="true">
+      <div class="loader-dot"></div>
+      <div class="loader-dot"></div>
+      <div class="loader-dot"></div>
+    </div>
+
+    <!-- the nasa photo sits fixed behind everything -->
+    <div id="bg" role="img" aria-label="nasa astronomy picture of the day"></div>
+
+    <!-- hero: the first thing you see when you open a new tab -->
+    <section id="hero">
+
+      <!-- big clock and date at the top -->
+      <div id="clock-block">
+        <time id="clock" aria-live="polite">00:00</time>
+        <div id="date"></div>
+      </div>
+
+      <!-- search bar + shortcuts panel in the middle -->
+      <div id="search-block">
+
+        <!-- google search — gets wider when you click it -->
+        <form id="search-form" role="search" aria-label="google search">
+          <svg id="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input
+            id="search-input"
+            type="search"
+            name="q"
+            placeholder="search the web…"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="search query"
+          />
+        </form>
+
+        <!-- frosted glass rectangle that holds all your shortcuts -->
+        <div id="shortcuts-panel">
+
+          <!-- the shortcuts grid gets populated by javascript -->
+          <nav id="shortcuts-grid" aria-label="quick links"></nav>
+
+          <!-- edit / done / add buttons in the bottom-right corner -->
+          <div id="shortcuts-toolbar">
+            <button id="add-btn"  class="toolbar-btn add  hidden">+ add</button>
+            <button id="done-btn" class="toolbar-btn done hidden">✓ done</button>
+            <button id="edit-btn" class="toolbar-btn">edit</button>
+          </div>
+
+          <!-- the little form that slides in when you click "+ add" -->
+          <form id="add-form" class="hidden" novalidate>
+            <input id="add-url"   class="add-input" type="text"
+              placeholder="url  (e.g. notion.so)" autocomplete="off" />
+            <input id="add-label" class="add-input" type="text"
+              placeholder="label" autocomplete="off" />
+            <button type="submit"  class="add-submit">add</button>
+            <button type="button"  id="cancel-add" class="add-cancel">cancel</button>
+          </form>
+
+        </div>
+      </div>
+
+      <!-- subtle arrow at the bottom — click to scroll to news -->
+      <button id="scroll-hint" aria-label="scroll to tech news">
+        <span>tech news</span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </button>
+
+    </section>
+
+    <!-- news section — scroll down or click the arrow above to get here -->
+    <section id="news-section">
+      <div id="news-heading">
+        <h2>tech news</h2>
+        <p>top stories from dev.to today</p>
+      </div>
+      <div id="news-slider-container">
+        <button id="news-prev-btn" class="slider-arrow" aria-label="previous article">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <div id="news-slider-content" aria-live="polite"></div>
+        <button id="news-next-btn" class="slider-arrow" aria-label="next article">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+      </div>
+    </section>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
